@@ -1,26 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
-import Component from './component'
+import React, { useState } from 'react';
+import Sidebar from './componentes/Sidebar';
+import Header from './componentes/Header';
+import Dashboard from './componentes/Dashboard';
 
 function App() {
+  const [section, setSection] = useState('dashboard');
+
+  const renderSection = () => {
+    switch (section) {
+      case 'translator':
+        return <div style={{ padding: '20px' }}>Aquí irá el Traductor</div>;
+      case 'settings':
+        return <div style={{ padding: '20px' }}>Aquí irá la Configuración</div>;
+      default:
+        return <Dashboard />;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-          esto es una prueba con react jdsjdffj
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Component/>
-      </header>
+    <div style={{ display: 'flex' }}>
+      <Sidebar onSelect={setSection} />
+      <div style={{ flexGrow: 1 }}>
+        <Header />
+        {renderSection()}
+      </div>
     </div>
   );
 }
