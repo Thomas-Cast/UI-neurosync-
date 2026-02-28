@@ -19,16 +19,14 @@ import {
   Close as CloseIcon,
 } from '@mui/icons-material';
 import { motion } from 'framer-motion';
-import { useNavigation, Page } from '../contexts/NavigationContext';
+import { useNavigation } from '../contexts/NavigationContext';
+
 
 const sidebarWidth = 280;
 
-interface SidebarProps {
-  open?: boolean;
-  onClose?: () => void;
-}
+// Se eliminó la interface SidebarProps
 
-export function Sidebar({ open: externalOpen, onClose: externalOnClose }: SidebarProps) {
+export function Sidebar({ open: externalOpen, onClose: externalOnClose }) {
   const { currentPage, setCurrentPage } = useNavigation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const theme = useTheme();
@@ -37,13 +35,14 @@ export function Sidebar({ open: externalOpen, onClose: externalOnClose }: Sideba
   const isOpen = isMobile ? mobileOpen : true;
   const handleToggle = () => setMobileOpen(!mobileOpen);
 
-  const navItems: Array<{ label: string; icon: React.ReactNode; page: Page }> = [
+  // Se limpió la definición de navItems quitando los tipos de TypeScript
+  const navItems = [
     { label: 'Home', icon: <Dashboard />, page: 'dashboard' },
     { label: 'Translator', icon: <Translate />, page: 'translator' },
     { label: 'Settings', icon: <Settings />, page: 'settings' },
   ];
 
-  const handleNavigate = (page: Page) => {
+  const handleNavigate = (page) => {
     setCurrentPage(page);
     if (isMobile) {
       setMobileOpen(false);

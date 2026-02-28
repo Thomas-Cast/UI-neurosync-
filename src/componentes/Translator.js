@@ -39,7 +39,7 @@ export function Translator() {
   const [targetLanguage, setTargetLanguage] = useState('es');
   const [isLoading, setIsLoading] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [recent, setRecent] = useState<any[]>([]);
+  const [recent, setRecent] = useState([]); // Eliminado <any[]>
 
   useEffect(() => {
     loadRecentTranslations();
@@ -62,7 +62,8 @@ export function Translator() {
     try {
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      const mockTranslations: Record<string, Record<string, string>> = {
+      // Eliminado el tipo Record<string, Record<string, string>>
+      const mockTranslations = {
         en: {
           es: 'Hola mundo, este es un texto traducido',
           fr: 'Bonjour le monde, ceci est un texte traduit',
@@ -78,7 +79,6 @@ export function Translator() {
         },
       };
 
-      const key = `${sourceLanguage}_${targetLanguage}`;
       let result =
         mockTranslations[sourceLanguage]?.[targetLanguage] ||
         `Translation from ${sourceLanguage} to ${targetLanguage}: "${sourceText}"`;

@@ -17,7 +17,8 @@ import { motion } from 'framer-motion';
 import { preferencesApi } from '../lib/neurosyncSupabase';
 
 export function Settings() {
-  const [preferences, setPreferences] = useState<any>(null);
+  // Se eliminó <any> y las definiciones de tipo en los parámetros
+  const [preferences, setPreferences] = useState(null);
   const [loading, setLoading] = useState(true);
   const [saved, setSaved] = useState(false);
 
@@ -36,7 +37,8 @@ export function Settings() {
     }
   };
 
-  const handlePreferenceChange = (key: string, value: any) => {
+  // Se eliminaron los tipos : string y : any de los argumentos
+  const handlePreferenceChange = (key, value) => {
     setPreferences({
       ...preferences,
       [key]: value,
