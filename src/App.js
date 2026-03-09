@@ -6,31 +6,32 @@ import { Header } from './componentes/Header';
 import { Dashboard } from './componentes/Dashboard';
 
 function AppContent() {
+  // Ahora sí, el Hook está dentro de un componente funcional
   const { isSidebarOpen } = useNavigation();
 
   return (
     <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#050714' }}>
       
-      <Sidebar />
+      {/* Pasamos el estado para que el Sidebar sepa si abrirse o cerrarse */}
+      <Sidebar open={isSidebarOpen} />
       
-      {/* Contenedor principal */}
       <Box 
         sx={{ 
           flexGrow: 1, 
           display: 'flex', 
           flexDirection: 'column',
-          minWidth: 0, // Evita que el contenido desborde en pantallas chicas
+          minWidth: 0,
           transition: 'all 0.3s ease',
+          // Ajustamos el margen según el menú esté abierto (280px) o cerrado (80px)
+          ml: { md: isSidebarOpen ? '280px' : '80px' }
         }}
       >
-        {/* El Header ahora está fuera del padding, ocupando el 100% del ancho disponible */}
         <Header />
         
-        {/* El contenido (Dashboard) mantiene su padding para no pegarse a los bordes */}
         <Box 
           component="main" 
           sx={{ 
-            p: { xs: 2, md: 4 }, // Padding responsivo
+            p: { xs: 2, md: 4 },
             flexGrow: 1,
             overflowY: 'auto' 
           }}
@@ -38,7 +39,6 @@ function AppContent() {
           <Dashboard />
         </Box>
       </Box>
-      
     </Box>
   );
 }
@@ -51,4 +51,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; // Asegúrate de que esta línea esté al final

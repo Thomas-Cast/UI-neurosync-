@@ -1,188 +1,159 @@
-import { Box, Card, CardContent, Typography, Grid, Button } from '@mui/material';
-import {
-  Speed,
-  CloudSync,
-  Security,
-  Psychology,
-} from '@mui/icons-material';
+import React from 'react';
+import { Box, Typography, Button, Grid, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
-import { useNavigation } from '../contexts/NavigationContext';
+
+// Estilo para el título principal con gradiente
+const fullTitleStyles = {
+  fontWeight: 800,
+  lineHeight: 1.1,
+  background: 'linear-gradient(180deg, #ffffff 0%, #00d4ff 50%, #ffffff 100%)',
+  backgroundSize: '100% 200%',
+  WebkitBackgroundClip: 'text',
+  WebkitTextFillColor: 'transparent',
+  transition: 'background-position 0.8s ease-in-out',
+  '&:hover': { backgroundPosition: '0% 100%' }
+};
+
+// Estilo para las palabras resaltadas en neón
+const neonHighlight = {
+  color: '#00d4ff',
+  fontWeight: 'bold',
+  fontSize: '1.2rem', // Un poco más grande que el texto base
+  textShadow: '0 0 10px rgba(0, 212, 255, 0.6)',
+  display: 'inline-block'
+};
 
 export function Dashboard() {
-  const { setCurrentPage } = useNavigation();
-
-  const cards = [
-    {
-      title: 'Traducción de señas con IA en tiempo real',
-      description: 'Sincronización lingüística instantánea potenciada por IA para romper barreras.',
-      icon: <CloudSync />,
-      color: '#00d4ff',
-      action: () => setCurrentPage('translator'),
-    },
-    {
-      title: 'Diferentes formas de traducir',
-      description: 'Sincroniza tus traducciones en todos tus dispositivos sin perder el ritmo.',
-      icon: <Speed />,
-      color: '#00ff88',
-      action: () => setCurrentPage('settings'),
-    },
-    {
-      title: 'Seguridad',
-      description: 'Tus traducciones protegidas con estándares de seguridad de nivel corporativo.',
-      icon: <Security />,
-      color: '#ff006e',
-      action: () => setCurrentPage('settings'),
-    },
-    {
-      title: 'AI Assistant',
-      description: 'Perfecciona tu comunicación con sugerencias e mejoras inteligentes.',
-      icon: <Psychology />,
-      color: '#ffd60a',
-      action: () => setCurrentPage('translator'),
-    },
-  ];
-
   return (
-    <Box
-      component={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      sx={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}
-    >
-      <Box sx={{ mb: 6 }}>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <Typography
-            variant="h3"
-            sx={{
-              fontWeight: 800,
-              fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
-              mb: 2,
-              background: 'linear-gradient(135deg, #ffffff 0%, #00d4ff 100%)',
-              backgroundClip: 'text',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-            }}
+    <Box sx={{ 
+      color: '#fff', 
+      px: 6, 
+      py: 2, 
+      width: '100%', 
+      minHeight: '85vh', 
+      display: 'flex', 
+      alignItems: 'center' 
+    }}>
+      <Grid container spacing={2} alignItems="center" wrap="nowrap">
+        
+        {/* LADO IZQUIERDO: TEXTO Y CONTENIDO */}
+        <Grid item xs={12} md={5}>
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }} 
+            animate={{ opacity: 1, x: 0 }} 
+            transition={{ duration: 0.8 }}
           >
-            Te damos la bienvenida a NeuroSync
-          </Typography>
+            <Typography variant="h3" sx={{ ...fullTitleStyles, fontSize: { md: '3.5rem', lg: '4rem' }, mb: 2 }}>
+              NeuroSync: <br />
+              Sincronizando el Lenguaje, <br />
+              conectando mundos.
+            </Typography>
+            
+            <Typography sx={{ color: '#b0b8cc', mb: 4, fontSize: '1.1rem', maxWidth: '480px', lineHeight: 1.7 }}>
+              La primera interfaz inteligente que transforma el lenguaje de señas en comunicación universal mediante {' '}
+              <Box component="span" sx={neonHighlight}>
+                visión computacional
+              </Box> {' '}
+              en {' '}
+              <Box component="span" sx={neonHighlight}>
+                tiempo real.
+              </Box>
+            </Typography>
 
-          <Typography
-            variant="h6"
-            sx={{
-              color: '#b0b8cc',
-              fontWeight: 400,
-              fontSize: '1.1rem',
-              maxWidth: '800px',
-              lineHeight: 1.6,
-            }}
-          >
-            Tu puente inteligente hacia un mundo sin barreras. 
-            <strong> Traduce lengua de señas en cualquier idioma </strong> 
-            y sincroniza tus conversaciones al instante con el poder de la IA.
-          </Typography>
-        </motion.div>
-      </Box>
-
-      {/* Grid responsivo: 1 columna en móvil, 2 en tablet, 4 en monitor grande */}
-      <Grid container spacing={3}>
-        {cards.map((card, index) => (
-          <Grid item xs={12} sm={6} md={6} lg={3} key={card.title}>
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -10 }}
-              style={{ height: '100%' }}
+            <Button 
+              variant="contained" 
+              sx={{ 
+                backgroundColor: 'rgba(0, 212, 255, 0.1)', 
+                border: '2px solid #00d4ff', 
+                color: '#00d4ff',
+                borderRadius: '15px', 
+                px: 4, py: 1.5, 
+                fontWeight: 'bold', 
+                textTransform: 'none',
+                boxShadow: '0 0 15px rgba(0, 212, 255, 0.2)',
+                '&:hover': { 
+                  backgroundColor: 'rgba(0, 212, 255, 0.2)', 
+                  boxShadow: '0 0 25px #00d4ff',
+                  transform: 'translateY(-2px)'
+                },
+                transition: 'all 0.3s ease'
+              }}
             >
-              <Card
-                sx={{
-                  height: '100%',
-                  backgroundColor: 'rgba(26, 31, 58, 0.4)',
-                  backgroundImage: 'linear-gradient(135deg, rgba(26, 31, 58, 0.6) 0%, rgba(15, 20, 37, 0.8) 100%)',
-                  border: `1px solid rgba(255, 255, 255, 0.1)`,
-                  borderRadius: '20px',
-                  cursor: 'pointer',
-                  transition: 'all 0.4s ease',
-                  backdropFilter: 'blur(12px)',
-                  position: 'relative',
-                  overflow: 'visible', // Evita que los brillos o iconos se corten
-                  '&:hover': {
-                    borderColor: card.color,
-                    boxShadow: `0 10px 40px ${card.color}25`,
-                    transform: 'scale(1.02)',
-                  },
+              Comenzar Traducción
+            </Button>
+          </motion.div>
+        </Grid>
+
+        {/* LADO DERECHO: VIDEO (Formato Prototipo) */}
+        <Grid item xs={12} md={7}>
+          <Box sx={{ width: '100%', pl: { md: 4 } }}>
+            <Paper
+              elevation={0}
+              sx={{
+                position: 'relative',
+                borderRadius: '30px',
+                backgroundColor: '#000',
+                border: '1px solid rgba(0, 212, 255, 0.3)',
+                width: '100%',
+                aspectRatio: '16/10', 
+                overflow: 'hidden',
+                boxShadow: '0 0 60px rgba(0, 212, 255, 0.2)'
+              }}
+            >
+              {/* Video limpio sin controles ni interacción */}
+              <video
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                disablePictureInPicture
+                style={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover', 
+                  pointerEvents: 'none' 
                 }}
-                onClick={card.action}
               >
-                <CardContent sx={{ p: 4 }}>
-                  {/* Contenedor del Icono: Aquí corregimos el recorte */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '60px',
-                      height: '60px',
-                      borderRadius: '15px',
-                      mb: 3,
-                      backgroundColor: `${card.color}15`,
-                      color: card.color,
-                      boxShadow: `0 0 20px ${card.color}20`,
-                      '& svg': {
-                        fontSize: '32px', // Tamaño controlado para que no se salga
-                      }
-                    }}
-                  >
-                    {card.icon}
-                  </Box>
+                <source src="/NeuroSyncVideoPagWeb.mp4" type="video/mp4" />
+              </video>
 
-                  <Typography
-                    variant="h6"
-                    sx={{
-                      fontWeight: 700,
-                      mb: 1.5,
-                      color: '#ffffff',
-                      fontSize: '1.25rem',
-                    }}
-                  >
-                    {card.title}
-                  </Typography>
+              {/* Status Online - Estilo Prototipo */}
+              <Box sx={{ 
+                position: 'absolute', 
+                top: 20, 
+                right: 25, 
+                border: '1px solid #00d4ff', 
+                px: 1.5, 
+                py: 0.5, 
+                borderRadius: '8px',
+                backgroundColor: 'rgba(5, 7, 20, 0.6)', 
+                backdropFilter: 'blur(4px)',
+                zIndex: 10
+              }}>
+                <Typography sx={{ fontSize: '0.65rem', color: '#00d4ff', fontWeight: 'bold', letterSpacing: '1px' }}>
+                   STATUS: ONLINE
+                </Typography>
+              </Box>
 
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color: '#7a8199',
-                      mb: 3,
-                      lineHeight: 1.7,
-                      fontSize: '0.95rem'
-                    }}
-                  >
-                    {card.description}
-                  </Typography>
+              {/* Efecto de línea de escaneo sutil */}
+              <Box
+                component={motion.div}
+                animate={{ top: ['0%', '100%', '0%'] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                sx={{
+                  position: 'absolute',
+                  left: 0, 
+                  width: '100%', 
+                  height: '2px',
+                  background: 'linear-gradient(90deg, transparent, #00d4ff, transparent)',
+                  zIndex: 2, 
+                  opacity: 0.2
+                }}
+              />
+            </Paper>
+          </Box>
+        </Grid>
 
-                  <Button
-                    variant="text"
-                    size="small"
-                    sx={{
-                      color: card.color,
-                      p: 0,
-                      fontWeight: 700,
-                      '&:hover': { background: 'transparent', letterSpacing: '1px' },
-                      transition: 'all 0.3s ease'
-                    }}
-                  >
-                    EXPLORAR →
-                  </Button>
-                </CardContent>
-              </Card>
-            </motion.div>
-          </Grid>
-        ))}
       </Grid>
     </Box>
   );
